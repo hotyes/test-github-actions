@@ -39,7 +39,7 @@ jobs:
           script: |
             const getPackageName = require(`${process.env.GITHUB_WORKSPACE}/.github/workflows/lib/get_package_name.js`)
             const packageName = getPackageName(`${{ steps.get_version.outputs.version }}`)
-            console.log(packageName)
+            echo "packageName: ${{ packageName }}"
           
           
           
