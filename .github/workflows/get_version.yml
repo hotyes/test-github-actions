@@ -26,9 +26,19 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Get the version
-        id: get_version
         run: |
           echo "ref_name=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_ENV
       - name: Print version
         run: |
           echo "${{ env.ref_name }}"
+      - id: get_version
+        uses: battila7/get-version-action@v2
+      - uses: actions/github-script@v3
+        with:
+          script: |
+            const getPackageName = require(`${process.env.GITHUB_WORKSPACE}/.github/workflows/lib/get_package_name.js`)
+            const packageName = getPackageName(${{ steps.get_version.outputs.version }})
+            echo "${{ packageName }}"
+          
+          
+          
