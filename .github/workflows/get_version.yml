@@ -42,7 +42,7 @@ jobs:
             console.log('package name:', packageName)
             echo `PACKAGE_NAME=${packageName}` >> $GITHUB_ENV
       - run: |
-          echo "${{ PACKAGE_NAME }}"
+          echo $env.PACKAGE_NAME
           
           
           
