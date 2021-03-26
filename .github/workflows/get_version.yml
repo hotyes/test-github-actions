@@ -31,6 +31,7 @@ jobs:
       - name: Print version
         run: |
           echo "${{ env.ref_name }}"
+      - uses: actions/checkout@v2
       - id: get_version
         uses: battila7/get-version-action@v2
       - uses: actions/github-script@v3
@@ -38,7 +39,7 @@ jobs:
           script: |
             const getPackageName = require(`${process.env.GITHUB_WORKSPACE}/.github/workflows/lib/get_package_name.js`)
             const packageName = getPackageName(${{ steps.get_version.outputs.version }})
-            echo packageName
+            console.log(packageName)
           
           
           
